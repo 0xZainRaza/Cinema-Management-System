@@ -80,12 +80,14 @@ include irvine32.inc
 		mov ebx, 0
 		mov edx, 0
 		mov esi, 0
-		
-		mov ecx, 5
+
+		call crlf
+
+		mov ecx, 4
 		l1:
 			push ecx
 			mov i, cl
-			mov ecx, 10
+			mov ecx, 9
 			l2:
 				mov j, cl
 				mov ebx, offset seats
@@ -97,10 +99,14 @@ include irvine32.inc
 				call writedec
 				mov al, ' '
 				call writechar
-				loop l2
+				dec ecx
+				cmp ecx, 0
+				jge l2
 			call crlf
 			pop ecx
-			loop l1		
+			dec ecx
+			cmp ecx, 0
+			jge l1
 		ret
 		showseats endp
 	end main
