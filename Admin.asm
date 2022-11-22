@@ -5,6 +5,8 @@ include irvine32.inc
 	p3 byte "Password: ",0
 	p4 byte "Login Successful!",0
 	p5 byte "Error! Username or password is incorrect, please try again...",0
+	pbook byte "Seat booked successfully!",0
+	pnbook byte "Seat has been already booked",0
 
 	password byte 30 DUP(?) 
 	username byte 30 DUP(?) 
@@ -22,6 +24,18 @@ include irvine32.inc
 .code
 	main proc
 		call loginfunc
+		call showseats
+		mov i, 3
+		mov j, 2
+		call bookseat
+		call showseats
+		mov i, 3
+		mov j, 2
+		call bookseat
+		call showseats
+		mov i, 4
+		mov j, 9
+		call bookseat
 		call showseats
 		exit
 		main endp
@@ -80,7 +94,6 @@ include irvine32.inc
 		mov ebx, 0
 		mov edx, 0
 		mov esi, 0
-
 		call crlf
 
 		mov ecx, 4
@@ -109,4 +122,29 @@ include irvine32.inc
 			jge l1
 		ret
 		showseats endp
+
+	bookseat proc
+		mov ebx, offset seats
+		mov eax, 10
+		mul i
+		add ebx, eax
+		movzx esi, j
+		lea edx, [ebx + esi]
+		call crlf
+		mov eax, [edx]
+		cmp eax, 1
+		jne s1
+			mov edx, offset pnbook
+			call writestring
+			call crlf
+			jmp s2
+		s1:
+			mov bl, 1
+			mov [edx], bl
+			mov edx, offset pbook
+			call writestring
+			call crlf
+		s2:
+		ret
+		bookseat endp
 	end main
