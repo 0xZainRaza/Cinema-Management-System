@@ -1,18 +1,30 @@
 include irvine32.inc
 .data
-	p1 byte "----------------Login----------------",0
+	Interface BYTE " <------------- [ MAIN INTERFACE ] ---------------> ",0ah
+			  BYTE " [ 1 ] ADMIN_LOGIN ",0ah
+			  BYTE " [ 2 ] USER	",0ah
+			  BYTE " [ 0 ] EXIT			:",0	
+
+
+	INTERFACE_ADMIN BYTE "<----------------- [ ADMIN ] ----------------->",OAh
+					BYTE " [ 1 ] SHOW SEATS ",0Ah
+					BYTE " [ 2 ] MOVIES ",OAh
+
+	p1 byte "[ ---------------- << LOGIN ADMIN INTERFACE >> ---------------- ]",0
 	p2 byte "Username: ",0
 	p3 byte "Password: ",0
 	p4 byte "Login Successful!",0
-	p5 byte "Error! Username or password is incorrect, please try again...",0
-	pbook byte "Seat booked successfully!",0
-	pnbook byte "Seat has been already booked",0
 
-	password byte 30 DUP(?) 
-	username byte 30 DUP(?) 
 
-	au byte "admin"
-	ap byte "admin"
+	p5 byte "[-] ERROR! Username or password is incorrect, please try again... ",0
+	pbook byte "[+] Seat booked SUCCESSFULLY! ",0
+	pnbook byte "[*] Seat has been already booked ",0
+
+	password byte 20 DUP(?) 
+	username byte 20 DUP(?) 
+
+	au byte "admin",0
+	ap byte "admin",0
 	seats	byte 10 DUP (0) 
 			byte 10 DUP (0)
 			byte 10 DUP (0)
@@ -21,34 +33,61 @@ include irvine32.inc
 	i byte ?
 	j byte ?
 
-.code
-	main proc
-		call loginfunc
-		call showseats
-		mov i, 3
-		mov j, 2
-		call bookseat
-		call showseats
-		mov i, 3
-		mov j, 2
-		call bookseat
-		call showseats
-		mov i, 4
-		mov j, 9
-		call bookseat
-		call showseats
-		exit
-		main endp
+	CH1 DWORD ?
+	ADMIN_LOG_FLAG BYTE ?
 
-	loginfunc proc
+.code
+	MAIN PROC															;MAIN PROGRAM
+
+		MAIN_L:	
+			CALL MAIN_INTERFACE
+			CALL READINT
+			MOV CH1,EAX													;CH1 IS A CHOISE VAR
+
+			CMP CH1,1
+				JE ADMIN_L
+
+			ADMIN_L:
+				CALL LOGINFUNC
+				CMP ADMIN_LOG_FLAG,0
+				JE ADMIN_L1
+				JMP MAIN_L
+
+				ADMIN_L1:
+					
+				
+
+
+			CMP CH1,0
+				JE EXIT_MAIN
+
+			LOOP MAIN_L
+
+		EXIT_MAIN:														;MAIN END
+		EXIT
+		MAIN ENDP
+
+		MAIN_INTERFACE PROC												;MAIN INTTERFACE PROC
+			CALL CLRSCR
+			CALL CRLF
+			MOV EDX, OFFSET Interface
+			CALL WRITESTRING
+			RET
+			MAIN_INTERFACE ENDP
+
+			
+
+	LOGINFUNC proc
 		l1:
+		call clrscr
 		mov eax, 0
 		mov ebx, 0
 		mov ecx, 0
 		mov edx, offset p1
 		call writestring
 		call crlf
-
+		call CRLF
+		
 		mov edx, offset p2     
 		call writestring
 		mov ecx, 255
@@ -65,13 +104,15 @@ include irvine32.inc
 
 		call crlf
 
-		mov esi, offset username
-		mov edi, offset au
+		mov edi, offset username
+		mov esi, offset au
 		cmpsb
 		je s1
 			mov edx, offset p5
 			call writestring
 			call crlf
+			MOV EAX, 3000
+			CALL DELAY
 			jmp l1
 		s1:
 		mov esi, offset password
@@ -81,13 +122,18 @@ include irvine32.inc
 			mov edx, offset p5
 			call writestring
 			call crlf
+			MOV EAX, 3000
+			CALL DELAY
 			jmp l1
 		s2:
 		mov edx, offset p4
 		call writestring
 		call crlf
+		MOV ADMIN_LOG_FLAG ,1
+		MOV EAX, 3000
+		CALL DELAY
 		ret
-		loginfunc endp
+		LOGINFUNC endp
 
 	showseats proc
 		mov eax, 0
