@@ -307,7 +307,6 @@ include irvine32.inc
 		mov esi, offset au
 		
 		mov ecx, lengthof au
-		dec ecx
 		usernameloop:
 			cmpsb
 			jne logfail1
@@ -325,7 +324,6 @@ include irvine32.inc
 		mov edi, offset ap
 		
 		mov ecx, lengthof ap
-		dec ecx
 		passwordloop:
 			cmpsb
 			jne logfail1
