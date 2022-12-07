@@ -1,26 +1,69 @@
 include irvine32.inc
 .data
-	Interface BYTE " <------------- [ MAIN INTERFACE ] ---------------> ",0ah
-			  BYTE "  <1> Admin login ",0ah
-			  BYTE "  <2> Customer	",0ah
-			  BYTE "  <0> Exit		 :",0	
+	Interface BYTE "   !?--------------------------------------------?!",0Ah
+			  BYTE " <<------------- [ MAIN INTERFACE ] --------------->> ",0Ah
+			  BYTE "   !?--------------------------------------------?!",0Ah,0ah
+			  BYTE "   <1> Admin login ",0ah
+			  BYTE "   <2> Customer	",0ah
+			  BYTE "   <0> Exit		 :",0	
+
+	INTERFACE_CUSTOMER BYTE " //----------------------------------------------\\",0Ah
+					BYTE " <----------------- [ CUSTOMER ] ----------------->",0Ah
+					BYTE " \\----------------------------------------------//",0Ah,0Ah
+					BYTE " [1] >> Shows Streaming Right Now ",0Ah
+					BYTE " [2] >> Shows Info ",0Ah
+					BYTE " [3] >> Buy Ticket ",0Ah
+					BYTE " [4] >> About Us   ",0Ah
+					BYTE " [5] >> Contact Us ",0Ah
+					BYTE " [6] >> Go Back			:",0
+	Welcome BYTE "<----------------- [ WELCOME CUSTOMER ] ----------------->",0
+	Buyticket BYTE "<----------------- [ BUY TICKET ] ----------------->",0
+	ShowInfo2 BYTE "<----------------- [ SHOW INFO ] ----------------->",0
+	ShowInfo Byte "   Time Slot         Normal Class        Gold Class",0
+	space1 byte "          ",0
+	space2 byte "               ",0
+	INTERFACE_ADMIN BYTE 0ah," <----------------- [ ADMIN ] ----------------->",0Ah
+
+					BYTE " << 1 >> Movie ",0Ah
+					BYTE " << 2 >> Timings ",0Ah
+					BYTE " << 3 >> Show seats ",0Ah
+					BYTE " << 4 >> Price  ",0Ah
+					BYTE " << 5 >> Go Back   :",0
+	show2 BYTE "The Shows are :",0
+	Aboutus3 BYTE 0ah," | Being the largest, purpose-built and standalone multiplex chain of Pakistan, ABC Cinemas promises its customers",0Ah
+			 BYTE " | a grandiose and larger than life experience like never bejfore. Having all its sites designed by world renowned ",0Ah
+			 BYTE " | cinema architects, Mesbur & Smith of Canada, and boasting top end 4K Digital projection systems custom designed",0Ah
+			 BYTE " | by Christie Digital Canada, ABC continues to stand out in the entertainment and recreational sector.In addition ",0Ah
+			 BYTE " | to this, all the screens of this brand have been outfitted by Asia’s number one cinema integration company called ",0Ah
+			 BYTE " | Eugentek Corporation, which is a crowning achievement of years of planning and execution. Comprising of the latest 3D",0Ah
+			 BYTE " | technology, custom designed Dolby 11.1 digital and sound systems for all theatre functionalities ABC continues",0Ah
+			 BYTE " | to be years ahead of any other cinema nationwide.",0ah
+			 BYTE " _______________________________________________________________________________________________________________________________",0
 
 
-	INTERFACE_ADMIN BYTE "<----------------- [ ADMIN ] ----------------->",0Ah
-					BYTE " <1> Movie ",0Ah
-					BYTE " <2> Timings ",0Ah
-					BYTE " <3> Show seats ",0Ah
-					BYTE " <4> Price  ",0Ah
-					BYTE " <5> Go Back   :",0
+	Aboutus1 BYTE " <----------------- [ ABOUT US ] ----------------->",0ah
+			 BYTE 0ah," __________________________________________________________________________________________________________________________ ",0
+	Contactus1 BYTE " <----------------- [ CONTACT US ] ----------------->",0
+	Contactus2 BYTE " >> For further information about movies you can download our Application", 0ah
+			   BYTE " >> (from the Google Play Store or from the iOS App Store)" ,0ah
+			   BYTE " >> contact us at [01234567896523] ",0ah
+			   BYTE " >> [*********@hotmail.com]",0
 	Options	BYTE " <1> Edit ",0Ah
 			BYTE " <2> Go Back: ",0
-	choice Byte "<1> Choice  :",0 
+	choice Byte 0ah," [1] Choice		>>:",0 
+	Goback BYTE 0ah," [0] Go Back		>>:",0
+	p1 byte " [ ---------------- << LOGIN ADMIN INTERFACE >> ---------------- ]",0
+	p2 byte 0ah," Username: ",0
+	p3 byte " Password: ",0
+	p4 byte " [+] <<|>> Login Successful!!! <<|>> [+]",0
 
-	p1 byte "[ ---------------- << LOGIN ADMIN INTERFACE >> ---------------- ]",0
-	p2 byte "Username: ",0
-	p3 byte "Password: ",0
-	p4 byte "Login Successful!",0
-	
+	askticket byte "Enter the number of tickets you want to purchase:",0
+	thankyou byte "Thank you for selecting the show. Now we request you to select your type of seating",0
+	Select byte "Select >",0
+	SelectSeat byte "Select your seat ",0
+	Enterrow byte "Please Enter The Row :",0
+	Entercolumn byte "Please Enter the Column",0
+
 
 	p5 byte "[-] ERROR! Username or password is incorrect, please try again... ",0
 	pbook byte "[+] Seat booked SUCCESSFULLY! ",0
@@ -78,7 +121,122 @@ include irvine32.inc
 	temp byte ?
 	Normal byte "1.Normal Class :",0
 	Gold byte "2.Gold Class :",0
-	seats	byte 10 DUP (0) 
+	SM1T1	byte 10 DUP (0) 
+	Rowsize = ($ - SM1T1)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM1T2	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+	
+	SM1T3	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM1T4	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM2T1	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM2T2	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+	
+	SM2T3	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM2T4	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+	
+	SM3T1	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM3T2	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+	
+	SM3T4	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM4T1	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM4T2	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM4T3	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+	
+	SM4T4	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM5T1	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM5T2	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM5T3	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+	
+	SM5T4	byte 10 DUP (0) 
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+			byte 10 DUP (0)
+
+	SM3T3	byte 10 DUP (0) 
 			byte 10 DUP (0)
 			byte 10 DUP (0)
 			byte 10 DUP (0)
@@ -99,7 +257,8 @@ include irvine32.inc
 
 			CMP CH1,1
 				JE ADMIN_L
-
+			cmp CH1,2
+			je C_l
 			CMP CH1,0
 				JE EXIT_MAIN
 			ADMIN_L:
@@ -108,8 +267,9 @@ include irvine32.inc
 				CMP ADMIN_LOG_FLAG,0
 				JE ADMIN_L1
 				JMP MAIN_L
-
-				ADMIN_L1:
+			C_l:
+				call customerinterface
+			ADMIN_L1:
 					
 			jmp MAIN_L
 
@@ -161,8 +321,6 @@ include irvine32.inc
 			mov edx, offset p5
 			call writestring
 			call crlf
-			MOV EAX, 3000
-			CALL DELAY
 			jmp l1
 		s1:
 		mov esi, offset password
@@ -172,58 +330,24 @@ include irvine32.inc
 			mov edx, offset p5
 			call writestring
 			call crlf
-			MOV EAX, 3000
-			CALL DELAY
 			jmp l1
 		s2:
 		mov edx, offset p4
 		call writestring
 		call crlf
+		mov eax, 4000
+		call delay
 		call admininterface
 		
 		MOV ADMIN_LOG_FLAG ,1
-		MOV EAX, 3000
-		CALL DELAY
 		ret
 		LOGINFUNC endp
 
-	showseats proc
-		mov eax, 0
-		mov ebx, 0
-		mov edx, 0
-		mov esi, 0
-		call crlf
-
-		mov ecx, 4
-		l1:
-			push ecx
-			mov i, cl
-			mov ecx, 9
-			l2:
-				mov j, cl
-				mov ebx, offset seats
-				mov eax, 10
-				mul i
-				add ebx, eax
-				movzx esi, j
-				mov al, [ebx + esi]
-				call writedec
-				mov al, ' '
-				call writechar
-				dec ecx
-				cmp ecx, 0
-				jge l2
-			call crlf
-			pop ecx
-			dec ecx
-			cmp ecx, 0
-			jge l1
-		ret
-		showseats endp
-
 	bookseat proc
-		mov ebx, offset seats
-		mov eax, 10
+		push ebp
+		mov ebp, esp
+		mov ebx, [ebp + 8]
+		mov eax, Rowsize
 		mul i
 		add ebx, eax
 		movzx esi, j
@@ -243,23 +367,493 @@ include irvine32.inc
 			call writestring
 			call crlf
 		s2:
-		ret
+		pop ebp
+		ret 4
 		bookseat endp
+
+	showseats proc
+		push ebp
+		call crlf
+		mov ebp, esp
+		mov eax, 0
+		mov ebx, 0
+		mov edx, 0
+		mov esi, 0
+		mov i, 0
+		
+		mov ecx, 5
+		l1:
+			mov j, 0
+			push ecx
+			mov ecx, 10
+			l2:
+				mov ebx, [ebp + 8]
+				mov eax, Rowsize
+				mul i
+				add ebx, eax
+				movzx esi, j
+				mov al, [ebx + esi]
+				call writedec
+				mov al, ' '
+				call writechar
+				inc j
+				loop l2
+			call crlf
+			inc i
+			pop ecx
+			loop l1		
+		call crlf
+		pop ebp
+		ret 4
+		showseats endp
 	admininterface proc
 	O:
-	call clrscr
-	mov edx,offset INTERFACE_ADMIN
+		call clrscr
+		mov edx,offset INTERFACE_ADMIN
+		call writestring
+		call readdec
+		mov CH1,eax
+
+		cmp CH1,1
+			je O1
+
+		cmp CH1,2
+			je O2
+
+		cmp CH1,3
+			je O3
+
+		cmp CH1,4
+			je O4
+
+		cmp CH1,5
+			je Endd
+
+	O3:
+	L4:
+		call clrscr
+		mov edx,offset showws
+		call writestring
+		call crlf
+
+		mov edx,offset one
+		call writestring
+		mov edx,offset M1
+		call writestring
+		call crlf
+
+		mov edx,offset two
+		call writestring
+		mov edx,offset M2
+		call writestring
+		call crlf
+
+		mov edx,offset three
+		call writestring
+		mov edx,offset M3
+		call writestring
+		call crlf
+
+		mov edx,offset four
+		call writestring
+		mov edx,offset M4
+		call writestring
+		call crlf
+
+		mov edx,offset five
+		call writestring
+		mov edx,offset M5
+		call writestring
+		call crlf
+
+		mov edx,offset choice
+		call writestring
+		call readdec
+
+		mov CH1,eax
+		call clrscr
+
+		cmp CH1,1
+		je B1
+		
+		cmp CH1,2
+		je B2
+		
+		cmp CH1,3
+		je B3
+		
+		cmp CH1,4
+		je B4
+		
+		cmp CH1,5
+		je B5
+
+	B5:
+		mov edx,offset Time
+		call writestring
+		call crlf
+
+		mov edx,offset one
+		call writestring
+		mov edx,offset TimeM5T1
+		call writestring
+		call crlf
+
+		mov edx,offset two
+		call writestring
+		mov edx,offset TimeM5T2
+		call writestring
+		call crlf
+
+		mov edx,offset three
+		call writestring
+		mov edx,offset TimeM5T3
+		call writestring
+		call crlf
+		
+		mov edx,offset four
+		call writestring
+		mov edx,offset TimeM5T4
+		call writestring
+		call crlf
+		
+		mov edx,offset choice
+		call writestring
+		call readdec
+
+		cmp CH1,1
+		je Sssss1
+		cmp CH1,2
+		je Sssss2
+		cmp CH1,3
+		je Sssss3
+		cmp CH1,4
+		je Sssss4
+		Sssss4:
+		push offset SM5T4
+		call showseats
+		mov edx,offset Goback
+		call writestring
+		call readdec
+		mov CH1,eax
+		cmp CH1,0
+		je O
+	Sssss3:
+	push offset SM5T3
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Sssss2:
+	push offset SM5T2
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Sssss1:
+	push offset SM5T1
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	B4:
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM4T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM4T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM4T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM4T4
+	call writestring
+	call crlf
+	mov edx,offset choice
 	call writestring
 	call readdec
 	mov CH1,eax
 	cmp CH1,1
-	je O1
+	je Ssss1
 	cmp CH1,2
-	je O2
+	je Ssss2
+	cmp CH1,3
+	je Ssss3
 	cmp CH1,4
-	je O4
-	cmp CH1,5
-	je Endd
+	je Ssss4
+	Ssss4:
+	push offset SM4T4
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Ssss3:
+	push offset SM4T3
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Ssss2:
+	push offset SM4T2
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Ssss1:
+	push offset SM4T1
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	B3:
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM3T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM3T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM3T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM3T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je Sss1
+	cmp CH1,2
+	je Sss2
+	cmp CH1,3
+	je Sss3
+	cmp CH1,4
+	je Sss4
+	Sss4:
+	push offset SM3T4
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Sss3:
+	push offset SM3T3
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Sss2:
+	push offset SM3T2
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Sss1:
+	push offset SM3T1
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	B2:
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM2T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM2T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM2T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM2T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je Ss1
+	cmp CH1,2
+	je Ss2
+	cmp CH1,3
+	je Ss3
+	cmp CH1,4
+	je Ss4
+	Ss4:
+	push offset SM2T4
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Ss3:
+	push offset SM2T3
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Ss2:
+	push offset SM2T2
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	Ss1:
+	push offset SM2T1
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	B1:
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM1T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM1T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM1T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM1T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je S1
+	cmp CH1,2
+	je S2
+	cmp CH1,3
+	je S3
+	cmp CH1,4
+	je S4
+	S4:
+	push offset SM1T4
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	S3:
+	push offset SM1T3
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	S2:
+	push offset SM1T2
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	S1:
+	push offset SM1T1
+	call showseats
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je O
+	jmp L4
 	O4:
 	L3:
 	call clrscr
@@ -554,6 +1148,8 @@ include irvine32.inc
 	mov CH1,eax
 	cmp Ch1,2
 	je O
+
+
 	call clrscr
 	mov edx,offset Price
 	call writestring
@@ -577,32 +1173,20 @@ include irvine32.inc
 	cmp CH1,2
 	je PMG2
 	PMG1:
-	mov edx,offset askprice
-	call writestring
-	mov edx,offset PriceMG1
-	mov ecx,255
-	call readstring
-	jmp Price1
+		mov edx,offset askprice
+		call writestring
+		mov edx,offset PriceMG1
+		mov ecx,255
+		call readstring
+		jmp Price1
+
 	PMN1:
-	mov edx,offset askprice
-	call writestring
-	mov edx,offset PriceMN1
-	mov ecx,255
-	call readstring
-	jmp Price1
-
-
-
-
-
-
-
-
-
-
-
-
-
+		mov edx,offset askprice
+		call writestring
+		mov edx,offset PriceMN1
+		mov ecx,255
+		call readstring
+		jmp Price1
 
 
 	jmp L3
@@ -1259,4 +1843,1565 @@ include irvine32.inc
 	ret
 
 	admininterface ENDP
+	customerinterface Proc
+	L1:
+	call clrscr
+	Call crlf
+	mov edx,offset INTERFACE_CUSTOMER
+	call writestring
+	call readdec
+
+	mov CH1,eax
+	cmp CH1,1
+	je O1
+	cmp CH1,2
+	je O2
+	cmp CH1,3
+	je O3
+	cmp CH1,4
+	je O4
+	cmp CH1,6
+	je O6
+	O5:
+	call clrscr
+	mov edx,offset Contactus1
+	call crlf
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset Contactus2
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	jmp L1
+	O4:
+	call clrscr
+	mov edx,offset Aboutus1
+	call writestring
+	call crlf
+	mov edx,offset Aboutus3
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	jmp L1
+	O3:
+	call clrscr
+	mov edx,offset Buyticket
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset M1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset M2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset M3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset M4
+	call writestring
+	call crlf
+	mov edx,offset five
+	call writestring
+	mov edx,offset M5
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je BI1
+	cmp CH1,2
+	je BI2
+	cmp CH1,3
+	je BI3
+	cmp CH1,4
+	je BI4
+	cmp CH1,5
+	je BI5
+	BI5:
+	call clrscr
+	mov edx,offset Buyticket
+	call writestring
+	call crlf
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM5T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM5T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM5T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM5T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je BTM5T1
+	cmp CH1,2
+	je BTM5T2
+	cmp CH1,3
+	je BTM5T3
+	cmp CH1,4
+	je BTM5T4
+	BTM5T4:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM5T4
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM5T4
+	call bookseat
+	push offset SM5T4
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM5T3:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM5T3
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM5T3
+	call bookseat
+	push offset SM5T3
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM5T2:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM5T2
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM5T2
+	call bookseat
+	push offset SM5T2
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM5T1:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM5T1
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM5T1
+	call bookseat
+	push offset SM5T1
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BI4:
+	call clrscr
+	mov edx,offset Buyticket
+	call writestring
+	call crlf
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM4T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM4T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM4T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM4T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je BTM4T1
+	cmp CH1,2
+	je BTM4T2
+	cmp CH1,3
+	je BTM4T3
+	cmp CH1,4
+	je BTM4T4
+	BTM4T4:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM4T4
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM4T4
+	call bookseat
+	push offset SM4T4
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM4T3:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM4T3
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM4T3
+	call bookseat
+	push offset SM4T3
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM4T2:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM4T2
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM4T2
+	call bookseat
+	push offset SM4T2
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM4T1:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM4T1
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM4T1
+	call bookseat
+	push offset SM4T1
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BI3:
+	call clrscr
+	mov edx,offset Buyticket
+	call writestring
+	call crlf
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM3T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM3T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM3T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM3T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je BTM3T1
+	cmp CH1,2
+	je BTM3T2
+	cmp CH1,3
+	je BTM3T3
+	cmp CH1,4
+	je BTM3T4
+	BTM3T4:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM3T4
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM3T4
+	call bookseat
+	push offset SM3T4
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM3T3:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM3T3
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM3T3
+	call bookseat
+	push offset SM3T3
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM3T2:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM3T2
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM3T2
+	call bookseat
+	push offset SM3T2
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM3T1:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM3T1
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM3T1
+	call bookseat
+	push offset SM3T1
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BI2:
+	call clrscr
+	mov edx,offset Buyticket
+	call writestring
+	call crlf
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM2T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM2T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM2T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM2T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je BTM2T1
+	cmp CH1,2
+	je BTM2T2
+	cmp CH1,3
+	je BTM2T3
+	cmp CH1,4
+	je BTM2T4
+	BTM2T4:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM2T4
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM2T4
+	call bookseat
+	push offset SM2T4
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM2T3:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM2T3
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM2T3
+	call bookseat
+	push offset SM2T3
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM2T2:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM2T2
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM2T2
+	call bookseat
+	push offset SM2T2
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM2T1:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM2T1
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM2T1
+	call bookseat
+	push offset SM2T1
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BI1:
+	call clrscr
+	mov edx,offset Buyticket
+	call writestring
+	call crlf
+	mov edx,offset Time
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM1T1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM1T2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM1T3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM1T4
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je BTM1T1
+	cmp CH1,2
+	je BTM1T2
+	cmp CH1,3
+	je BTM1T3
+	cmp CH1,4
+	je BTM1T4
+	BTM1T4:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM1T4
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM1T4
+	call bookseat
+	push offset SM1T4
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM1T3:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM5T3
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM1T3
+	call bookseat
+	push offset SM1T3
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM1T2:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM1T2
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM1T2
+	call bookseat
+	push offset SM1T2
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	BTM1T1:
+	mov edx,offset askticket
+	call writestring
+	call readdec
+	mov edx,offset thankyou
+	call writestring
+	call crlf
+	mov edx,offset normal
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset gold
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	call crlf
+	mov edx,offset Select
+	call writestring
+	call readdec
+	push offset SM1T1
+	call showseats
+	mov edx,offset EnterRow
+	call writestring
+	call readdec
+	sub al,1
+	mov i,al
+	mov edx,offset EnterColumn
+	call writestring
+	call readdec
+	sub al,1
+	mov j,al
+	push offset SM1T1
+	call bookseat
+	push offset SM1T1
+	call showseats
+	mov edx,offset GoBack
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	O2:
+	call clrscr
+	mov edx,offset Welcome
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset M1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset M2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset M3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset M4
+	call writestring
+	call crlf
+	mov edx,offset five
+	call writestring
+	mov edx,offset M5
+	call writestring
+	call crlf
+	mov edx,offset choice
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,1
+	je SI1
+	cmp CH1,2
+	je SI2
+	cmp CH1,3
+	je SI3
+	cmp CH1,4
+	je SI4
+	cmp CH1,5
+	je SI5
+	SI1:
+	call clrscr
+	mov edx,offset ShowInfo2
+	call writestring
+	call crlf
+	mov edx,offset ShowInfo
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM1T1
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM1T2
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM1T3
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM1T4
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG1
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN1
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	SI2:
+	call clrscr
+	mov edx,offset ShowInfo2
+	call writestring
+	call crlf
+	mov edx,offset ShowInfo
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM2T1
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM2T2
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM2T3
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM2T4
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG2
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN2
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	SI3:
+	call clrscr
+	mov edx,offset ShowInfo2
+	call writestring
+	call crlf
+	mov edx,offset ShowInfo
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM3T1
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM3T2
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM3T3
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM3T4
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG3
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN3
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	SI4:
+	call clrscr
+	mov edx,offset ShowInfo2
+	call writestring
+	call crlf
+	mov edx,offset ShowInfo
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM4T1
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM4T2
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM4T3
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM4T4
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG4
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN4
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	SI5:
+	call clrscr
+	mov edx,offset ShowInfo2
+	call writestring
+	call crlf
+	mov edx,offset ShowInfo
+	call writestring
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset TimeM5T1
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset TimeM5T2
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset TimeM5T3
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset TimeM5T4
+	call writestring
+	mov edx,offset space1
+	call writestring
+	mov edx,offset PriceMG5
+	call writestring
+	mov edx,offset space2
+	call writestring
+	mov edx,offset PriceMN5
+	call writestring
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp CH1,0
+	je L1
+	O1:
+	call clrscr
+	mov edx,offset Welcome
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset show2
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset one
+	call writestring
+	mov edx,offset M1
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset two
+	call writestring
+	mov edx,offset M2
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset three
+	call writestring
+	mov edx,offset M3
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset four
+	call writestring
+	mov edx,offset M4
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset five
+	call writestring
+	mov edx,offset M5
+	call writestring
+	call crlf
+	call crlf
+	mov edx,offset Goback
+	call writestring
+	call readdec
+	mov CH1,eax
+	cmp Ch1,1
+	jmp L1
+	O6:
+
+
+
+
+
+	ret
+customerinterface endp
 	end main
