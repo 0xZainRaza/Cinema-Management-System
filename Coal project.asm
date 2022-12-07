@@ -277,7 +277,7 @@ include irvine32.inc
 			
 
 	LOGINFUNC proc
-		l1:
+		Login1:
 		call clrscr
 		mov eax, 0
 		mov ebx, 0
@@ -305,25 +305,38 @@ include irvine32.inc
 
 		mov edi, offset username
 		mov esi, offset au
-		cmpsb
-		je s1
+		
+		mov ecx, lengthof au
+		dec ecx
+		usernameloop:
+			cmpsb
+			jne logfail1
+			loop usernameloop
+		jmp s1
+			logfail1:
 			mov edx, offset p5
 			call writestring
 			call crlf
 			MOV EAX, 3000
 			CALL DELAY
-			jmp l1
+			jmp Login1
 		s1:
 		mov esi, offset password
 		mov edi, offset ap
-		cmpsb
-		je s2
+		
+		mov ecx, lengthof ap
+		dec ecx
+		passwordloop:
+			cmpsb
+			jne logfail1
+			loop passwordloop
+		jmp s2
 			mov edx, offset p5
 			call writestring
 			call crlf
 			MOV EAX, 3000
 			CALL DELAY
-			jmp l1
+			jmp Login1
 		s2:
 		mov edx, offset p4
 		call writestring
