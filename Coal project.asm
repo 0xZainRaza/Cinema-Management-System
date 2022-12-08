@@ -6,52 +6,63 @@
 
 include irvine32.inc
 .data
+	Interface BYTE "   !?--------------------------------------------?!",0Ah
+			  BYTE " <<------------- [ MAIN INTERFACE ] --------------->> ",0Ah
+			  BYTE "   !?--------------------------------------------?!",0Ah,0ah
+			  BYTE "   <1> Admin login ",0ah
+			  BYTE "   <2> Customer	",0ah
+			  BYTE "   <0> Exit		 :",0	
 
-	Interface BYTE " <------------- [ MAIN INTERFACE ] ---------------> ",0ah
-			  BYTE "  <1> Admin login ",0ah
-			  BYTE "  <2> Customer	",0ah
-			  BYTE "  <0> Exit		 :",0	
-	INTERFACE_CUSTOMER BYTE "<----------------- [ CUSTOMER ] ----------------->",0Ah
-					BYTE " <1> Shows Streaming Right Now ",0Ah
-					BYTE " <2> Shows Info ",0Ah
-					BYTE " <3> Buy Ticket ",0Ah
-					BYTE " <4> About Us   ",0Ah
-					BYTE " <5> Contact Us ",0Ah
-					BYTE " <6> Go Back   :",0
+	INTERFACE_CUSTOMER BYTE " //----------------------------------------------\\",0Ah
+					BYTE " <----------------- [ CUSTOMER ] ----------------->",0Ah
+					BYTE " \\----------------------------------------------//",0Ah,0Ah
+					BYTE " [1] >> Shows Streaming Right Now ",0Ah
+					BYTE " [2] >> Shows Info ",0Ah
+					BYTE " [3] >> Buy Ticket ",0Ah
+					BYTE " [4] >> About Us   ",0Ah
+					BYTE " [5] >> Contact Us ",0Ah
+					BYTE " [6] >> Go Back			:",0
 	Welcome BYTE "<----------------- [ WELCOME CUSTOMER ] ----------------->",0
 	Buyticket BYTE "<----------------- [ BUY TICKET ] ----------------->",0
 	ShowInfo2 BYTE "<----------------- [ SHOW INFO ] ----------------->",0
 	ShowInfo Byte "   Time Slot         Normal Class        Gold Class",0
 	space1 byte "          ",0
 	space2 byte "               ",0
-	INTERFACE_ADMIN BYTE "<----------------- [ ADMIN ] ----------------->",0Ah
+	INTERFACE_ADMIN BYTE 0ah," <----------------- [ ADMIN ] ----------------->",0Ah,0ah
 
-					BYTE " <1> Movie ",0Ah
-					BYTE " <2> Timings ",0Ah
-					BYTE " <3> Show seats ",0Ah
-					BYTE " <4> Price  ",0Ah
-					BYTE " <5> Go Back   :",0
+					BYTE "  << 1 >> Movie ",0Ah
+					BYTE "  << 2 >> Timings ",0Ah
+					BYTE "  << 3 >> Show seats ",0Ah
+					BYTE "  << 4 >> Price  ",0Ah
+					BYTE "  << 5 >> Go Back			:",0
 	show2 BYTE "The Shows are :",0
-	Aboutus3 BYTE "Being the largest, purpose-built and standalone multiplex chain of Pakistan, ABC Cinemas promises its customers",0Ah
-			 BYTE "a grandiose and larger than life experience like never bejfore. Having all its sites designed by world renowned ",0Ah
-			 BYTE "cinema architects, Mesbur & Smith of Canada, and boasting top end 4K Digital projection systems custom designed",0Ah
-			 BYTE "by Christie Digital Canada, ABC continues to stand out in the entertainment and recreational sector.In addition ",0Ah
-			 BYTE "to this, all the screens of this brand have been outfitted by Asia’s number one cinema integration company called ",0Ah
-			 BYTE "Eugentek Corporation, which is a crowning achievement of years of planning and execution. Comprising of the latest 3D",0Ah
-			 BYTE "technology, custom designed Dolby 11.1 digital and sound systems for all theatre functionalities ABC continues",0Ah
-			 BYTE "to be years ahead of any other cinema nationwide.",0
-	Aboutus1 BYTE "<----------------- [ ABOUT US ] ----------------->",0
-	Contactus1 BYTE "<----------------- [ CONTACT US ] ----------------->",0
-	Contactus2 BYTE "For further information about movies you can download our Application(from the  Google Play Store or from ",0Ah
-			BYTE "the iOS App Store) or contact us at 01234567896523",0			
+	Aboutus3 BYTE 0ah," | Being the largest, purpose-built and standalone multiplex chain of Pakistan, ABC Cinemas promises its customers",0Ah
+			 BYTE " | a grandiose and larger than life experience like never bejfore. Having all its sites designed by world renowned ",0Ah
+			 BYTE " | cinema architects, Mesbur & Smith of Canada, and boasting top end 4K Digital projection systems custom designed",0Ah
+			 BYTE " | by Christie Digital Canada, ABC continues to stand out in the entertainment and recreational sector.In addition ",0Ah
+			 BYTE " | to this, all the screens of this brand have been outfitted by Asia’s number one cinema integration company called ",0Ah
+			 BYTE " | Eugentek Corporation, which is a crowning achievement of years of planning and execution. Comprising of the latest 3D",0Ah
+			 BYTE " | technology, custom designed Dolby 11.1 digital and sound systems for all theatre functionalities ABC continues",0Ah
+			 BYTE " | to be years ahead of any other cinema nationwide.",0ah
+			 BYTE " _______________________________________________________________________________________________________________________________",0
+
+
+	Aboutus1 BYTE " <----------------- [ ABOUT US ] ----------------->",0ah
+			 BYTE 0ah," __________________________________________________________________________________________________________________________ ",0
+	Contactus1 BYTE " <----------------- [ CONTACT US ] ----------------->",0
+	Contactus2 BYTE " >> For further information about movies you can download our Application", 0ah
+			   BYTE " >> (from the Google Play Store or from the iOS App Store)" ,0ah
+			   BYTE " >> contact us at [01234567896523] ",0ah
+			   BYTE " >> [*********@hotmail.com]",0
 	Options	BYTE " <1> Edit ",0Ah
 			BYTE " <2> Go Back: ",0
-	choice Byte "<1> Choice  :",0 
-	Goback BYTE "<0> Go Back  :",0
-	p1 byte "[ ---------------- << LOGIN ADMIN INTERFACE >> ---------------- ]",0
-	p2 byte "Username: ",0
-	p3 byte "Password: ",0
-	p4 byte "Login Successful!",0
+	choice Byte 0ah," [1] Choice		>>:",0 
+	Goback BYTE 0ah," [0] Go Back		>>:",0
+	p1 byte " [ ---------------- << LOGIN ADMIN INTERFACE >> ---------------- ]",0
+	p2 byte 0ah," Username: ",0
+	p3 byte " Password: ",0
+	p4 byte " [+] <<|>> Login Successful!!! <<|>> [+]",0
+
 	askticket byte "Enter the number of tickets you want to purchase:",0
 	thankyou byte "Thank you for selecting the show. Now we request you to select your type of seating",0
 	Select byte "Select >",0
@@ -283,7 +294,7 @@ include irvine32.inc
 			
 
 	LOGINFUNC proc
-		Login1:
+		l1:
 		call clrscr
 		mov eax, 0
 		mov ebx, 0
@@ -311,45 +322,30 @@ include irvine32.inc
 
 		mov edi, offset username
 		mov esi, offset au
-		
-		mov ecx, lengthof au
-		usernameloop:
-			cmpsb
-			jne logfail1
-			loop usernameloop
-		jmp s1
-			logfail1:
+		cmpsb
+		je s1
 			mov edx, offset p5
 			call writestring
 			call crlf
-			MOV EAX, 3000
-			CALL DELAY
-			jmp Login1
+			jmp l1
 		s1:
 		mov esi, offset password
 		mov edi, offset ap
-		
-		mov ecx, lengthof ap
-		passwordloop:
-			cmpsb
-			jne logfail1
-			loop passwordloop
-		jmp s2
+		cmpsb
+		je s2
 			mov edx, offset p5
 			call writestring
 			call crlf
-			MOV EAX, 3000
-			CALL DELAY
-			jmp Login1
+			jmp l1
 		s2:
 		mov edx, offset p4
 		call writestring
 		call crlf
+		mov eax, 4000
+		call delay
 		call admininterface
 		
 		MOV ADMIN_LOG_FLAG ,1
-		MOV EAX, 3000
-		CALL DELAY
 		ret
 		LOGINFUNC endp
 
@@ -418,111 +414,141 @@ include irvine32.inc
 		showseats endp
 	admininterface proc
 	O:
-	call clrscr
-	mov edx,offset INTERFACE_ADMIN
-	call writestring
-	call readdec
-	mov CH1,eax
-	cmp CH1,1
-	je O1
-	cmp CH1,2
-	je O2
-	cmp CH1,3
-	je O3
-	cmp CH1,4
-	je O4
-	cmp CH1,5
-	je Endd
+		call clrscr
+		mov edx,offset INTERFACE_ADMIN
+		call writestring
+		call readdec
+		mov CH1,eax
+
+		cmp CH1,1
+			je O1
+
+		cmp CH1,2
+			je O2
+
+		cmp CH1,3
+			je O3
+
+		cmp CH1,4
+			je O4
+
+		cmp CH1,5
+			je Endd
+
 	O3:
 	L4:
-	call clrscr
-	mov edx,offset showws
-	call writestring
-	call crlf
-	mov edx,offset one
-	call writestring
-	mov edx,offset M1
-	call writestring
-	call crlf
-	mov edx,offset two
-	call writestring
-	mov edx,offset M2
-	call writestring
-	call crlf
-	mov edx,offset three
-	call writestring
-	mov edx,offset M3
-	call writestring
-	call crlf
-	mov edx,offset four
-	call writestring
-	mov edx,offset M4
-	call writestring
-	call crlf
-	mov edx,offset five
-	call writestring
-	mov edx,offset M5
-	call writestring
-	call crlf
-	mov edx,offset choice
-	call writestring
-	call readdec
-	mov CH1,eax
-	call clrscr
-	cmp CH1,1
-	je B1
-	cmp CH1,2
-	je B2
-	cmp CH1,3
-	je B3
-	cmp CH1,4
-	je B4
-	cmp CH1,5
-	je B5
+		call clrscr
+		mov edx,offset showws
+		call writestring
+		call crlf
+
+		mov edx,offset one
+		call writestring
+		mov edx,offset M1
+		call writestring
+		call crlf
+
+		mov edx,offset two
+		call writestring
+		mov edx,offset M2
+		call writestring
+		call crlf
+
+		mov edx,offset three
+		call writestring
+		mov edx,offset M3
+		call writestring
+		call crlf
+
+		mov edx,offset four
+		call writestring
+		mov edx,offset M4
+		call writestring
+		call crlf
+
+		mov edx,offset five
+		call writestring
+		mov edx,offset M5
+		call writestring
+		call crlf
+
+		mov edx,offset choice
+		call writestring
+		call readdec
+
+		mov CH1,eax
+		call clrscr
+
+		cmp CH1,1
+		je B1
+		
+		cmp CH1,2
+		je B2
+		
+		cmp CH1,3
+		je B3
+		
+		cmp CH1,4
+		je B4
+		
+		cmp CH1,5
+		je B5
+
 	B5:
-	mov edx,offset Time
-	call writestring
-	call crlf
-	mov edx,offset one
-	call writestring
-	mov edx,offset TimeM5T1
-	call writestring
-	call crlf
-	mov edx,offset two
-	call writestring
-	mov edx,offset TimeM5T2
-	call writestring
-	call crlf
-	mov edx,offset three
-	call writestring
-	mov edx,offset TimeM5T3
-	call writestring
-	call crlf
-	mov edx,offset four
-	call writestring
-	mov edx,offset TimeM5T4
-	call writestring
-	call crlf
-	mov edx,offset choice
-	call writestring
-	call readdec
-	cmp CH1,1
-	je Sssss1
-	cmp CH1,2
-	je Sssss2
-	cmp CH1,3
-	je Sssss3
-	cmp CH1,4
-	je Sssss4
-	Sssss4:
-	push offset SM5T4
-	call showseats
-	mov edx,offset Goback
-	call writestring
-	call readdec
-	mov CH1,eax
-	cmp CH1,0
-	je O
+		mov edx,offset Time
+		call writestring
+		call crlf
+
+		mov edx,offset one
+		call writestring
+		mov edx,offset TimeM5T1
+		call writestring
+		call crlf
+
+		mov edx,offset two
+		call writestring
+		mov edx,offset TimeM5T2
+		call writestring
+		call crlf
+
+		mov edx,offset three
+		call writestring
+		mov edx,offset TimeM5T3
+		call writestring
+		call crlf
+		
+		mov edx,offset four
+		call writestring
+		mov edx,offset TimeM5T4
+		call writestring
+		call crlf
+		
+		mov edx,offset choice
+		call writestring
+		call readdec
+
+		cmp CH1,1
+		je Sssss1
+
+		cmp CH1,2
+		je Sssss2
+		
+		cmp CH1,3
+		je Sssss3
+		
+		cmp CH1,4
+		je Sssss4
+		
+		Sssss4:
+			push offset SM5T4
+			call showseats
+			mov edx,offset Goback
+			call writestring
+			call readdec
+			mov CH1,eax
+
+			cmp CH1,0
+				je O
 	Sssss3:
 	push offset SM5T3
 	call showseats
@@ -1133,6 +1159,8 @@ include irvine32.inc
 	mov CH1,eax
 	cmp Ch1,2
 	je O
+
+
 	call clrscr
 	mov edx,offset Price
 	call writestring
@@ -1156,32 +1184,20 @@ include irvine32.inc
 	cmp CH1,2
 	je PMG2
 	PMG1:
-	mov edx,offset askprice
-	call writestring
-	mov edx,offset PriceMG1
-	mov ecx,255
-	call readstring
-	jmp Price1
+		mov edx,offset askprice
+		call writestring
+		mov edx,offset PriceMG1
+		mov ecx,255
+		call readstring
+		jmp Price1
+
 	PMN1:
-	mov edx,offset askprice
-	call writestring
-	mov edx,offset PriceMN1
-	mov ecx,255
-	call readstring
-	jmp Price1
-
-
-
-
-
-
-
-
-
-
-
-
-
+		mov edx,offset askprice
+		call writestring
+		mov edx,offset PriceMN1
+		mov ecx,255
+		call readstring
+		jmp Price1
 
 
 	jmp L3
@@ -1841,6 +1857,7 @@ include irvine32.inc
 	customerinterface Proc
 	L1:
 	call clrscr
+	Call crlf
 	mov edx,offset INTERFACE_CUSTOMER
 	call writestring
 	call readdec
@@ -1859,7 +1876,9 @@ include irvine32.inc
 	O5:
 	call clrscr
 	mov edx,offset Contactus1
+	call crlf
 	call writestring
+	call crlf
 	call crlf
 	mov edx,offset Contactus2
 	call writestring
@@ -3386,9 +3405,14 @@ include irvine32.inc
 	call writestring
 	call readdec
 	mov CH1,eax
+
 	cmp Ch1,1
 	jmp L1
 	O6:
+
+
+
+
 
 	ret
 customerinterface endp
