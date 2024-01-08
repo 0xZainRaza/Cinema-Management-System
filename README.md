@@ -5,6 +5,10 @@ This project demonstrates the usage of Assembly language with the Irvine32 libra
 ## Project Description
 This cinema management system efficiently handles cinema operations with both Admin and Customer interfaces. The Admin interface allows administrative changes, including setting show names, show time slots, and ticket prices. The Customer interface enables users to view current shows, time slots, book seats, purchase tickets, and access additional information like ABOUT US and CONTACT US.
 
+
+https://github.com/Taha-Qaiser-4779/COAL-Project/assets/154006182/3d833f84-ffb8-4989-8e54-c937d7757608
+
+
 ## Functionality
 ### Admin Interface
 - **Authentication:**
