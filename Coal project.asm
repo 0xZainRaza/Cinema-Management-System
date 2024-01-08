@@ -1,3 +1,9 @@
+; Made by
+; Taha Qaiser (21k-4779)
+; Ali Mehdi (21k-4771)
+; Zain Ali Raza (21k-4755)
+
+
 include irvine32.inc
 .data
 	Interface BYTE "   !?--------------------------------------------?!",0Ah
@@ -22,13 +28,13 @@ include irvine32.inc
 	ShowInfo Byte "   Time Slot         Normal Class        Gold Class",0
 	space1 byte "          ",0
 	space2 byte "               ",0
-	INTERFACE_ADMIN BYTE 0ah," <----------------- [ ADMIN ] ----------------->",0Ah
+	INTERFACE_ADMIN BYTE 0ah," <----------------- [ ADMIN ] ----------------->",0Ah,0ah
 
-					BYTE " << 1 >> Movie ",0Ah
-					BYTE " << 2 >> Timings ",0Ah
-					BYTE " << 3 >> Show seats ",0Ah
-					BYTE " << 4 >> Price  ",0Ah
-					BYTE " << 5 >> Go Back   :",0
+					BYTE "  << 1 >> Movie ",0Ah
+					BYTE "  << 2 >> Timings ",0Ah
+					BYTE "  << 3 >> Show seats ",0Ah
+					BYTE "  << 4 >> Price  ",0Ah
+					BYTE "  << 5 >> Go Back			:",0
 	show2 BYTE "The Shows are :",0
 	Aboutus3 BYTE 0ah," | Being the largest, purpose-built and standalone multiplex chain of Pakistan, ABC Cinemas promises its customers",0Ah
 			 BYTE " | a grandiose and larger than life experience like never bejfore. Having all its sites designed by world renowned ",0Ah
@@ -250,11 +256,7 @@ include irvine32.inc
 .code
 	MAIN PROC															;MAIN PROGRAM
 
-		MAIN_L:
-			
-			mov eax, 1 +(0*16)
-			call settextcolor
-			mov eax,0
+		MAIN_L:	
 			CALL MAIN_INTERFACE
 			CALL READINT
 			MOV CH1,EAX													;CH1 IS A CHOISE VAR
@@ -527,21 +529,26 @@ include irvine32.inc
 
 		cmp CH1,1
 		je Sssss1
+
 		cmp CH1,2
 		je Sssss2
+		
 		cmp CH1,3
 		je Sssss3
+		
 		cmp CH1,4
 		je Sssss4
+		
 		Sssss4:
-		push offset SM5T4
-		call showseats
-		mov edx,offset Goback
-		call writestring
-		call readdec
-		mov CH1,eax
-		cmp CH1,0
-		je O
+			push offset SM5T4
+			call showseats
+			mov edx,offset Goback
+			call writestring
+			call readdec
+			mov CH1,eax
+
+			cmp CH1,0
+				je O
 	Sssss3:
 	push offset SM5T3
 	call showseats
@@ -3398,9 +3405,11 @@ include irvine32.inc
 	call writestring
 	call readdec
 	mov CH1,eax
+
 	cmp Ch1,1
 	jmp L1
 	O6:
+
 
 
 
