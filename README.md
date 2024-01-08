@@ -43,7 +43,7 @@ https://github.com/Taha-Qaiser-4779/COAL-Project/assets/154006182/fdc14ce2-09f7-
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/Binary-Assassin/COAL-Project.git
+   git clone https://github.com/Taha-Qaiser-4779/COAL-Project.git
 
 
 ## Contributors
